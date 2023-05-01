@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Works Exercise</title>
+</head>
+<body>
+    <h1>How the Web Works Exercise</h1>
+    <h2>Part One: Terminology</h2>
+    <ul>
+        <li>HTTP stands for HyperText Transfer Protocol and is the standard convention for web browser-to-server communications.</li>
+        <li>URL stands for Universal Resource Locator and contains information necessary for rendering webpage content.</li>
+        <li>DNS stands for Domain Name Server and is the server your router will go to when it needs help locating an IP address.</li>
+        <li>A query string, found at the end of a URL, requests extra information from the website by specifiying values for certain pre-defined paramters.</li>
+        <li>The two HTTPS methods or 'verbs' focused on so far are GET and POST.  Both are requests but GET doesn't involve any side effects or impacts to the 
+            website's data.  POST does involve side effects.
+        </li>
+        <li>An HTTP request is what happens when your browser seeks to render a webpage.</li>
+        <li>An HTTP response is what is returned in consequence of an HTTP request.  Both events consist of header information.</li>
+        <li>An HTTP header is the first part of a request or response and consists of metadata.  Examples of header data I have seen include response codes and date/time info.</li>
+        <li>The processes that happen when you type “http://somesite.com/some/page.html”  into your browser include requests and responses.
+            First your computer searches the local cache, asks the router, and if still nothing matching the hostname is found, reaches out to the DNS.  Eventually
+            either a 404 response if returned or the IP address of somesite.com is located and your browser can start assembling the different components necessary for 
+            rendering the fully completed HTML content.
+        </li>
+    </ul>
+    <h2>Part Two: Practice Tools</h2>
+    <h3>I think the following goes into Terminal...</h3>
+    <p>Using <b><i>curl</i></b> to make a <b><i>GET</i></b> request for all the dad jokes involving the word "pirate":</p>
+    <p>% curl -H "Accept: application/json" "https://icanhazdadjoke.com/search?term=pirate"<br>
+        {"current_page":1,"limit":20,"next_page":1,"previous_page":1,"results":[{"id":"2gii3LeN7Ed","joke":"Why couldn't the kid see the pirate movie? Because it was rated arrr!"},
+        {"id":"QuscibaMClb","joke":"What does a pirate pay for his corn? A buccaneer!"},{"id":"SvzIBAQS0Dd","joke":"What did the pirate say on his 80th birthday? Aye Matey!"},
+        {"id":"exXSCtkOKe","joke":"Why do pirates not know the alphabet? They always get stuck at \"C\"."},{"id":"SnOf2gqjiqc","joke":"Why are pirates called pirates? Because they arrr!"}],
+        "search_term":"pirate","status":200,"total_jokes":5,"total_pages":1}</p><br>
+    <p>Using <b><i>dig</i></b> to find out the IP address of <i>icanhazdadjoke.com</i>:</p>
+    <p>% dig icanhazdadjoke.com A +noall +answer</p><br>
+    <p>; <<>> DiG 9.10.6 <<>> icanhazdadjoke.com A +noall +answer
+        ;; global options: +cmd
+        icanhazdadjoke.com.	300	IN	A	104.21.66.15
+        icanhazdadjoke.com.	300	IN	A	172.67.198.173</p><br>
+    <p>I made a "simple" webpage that actually took me many hours to figure out.  Using Terminal and Python to view the page in my browser:</p>
+    <p>% cd Desktop</p>
+    <p>% cd JeopardyProject</p>
+    <p>% python3 -m http.server</p><br>
+    <p>Serving HTTP on :: port 8000 (http://[::]:8000/) ...
+        ::1 - - [30/Apr/2023 12:12:55] "GET / HTTP/1.1" 304 -
+        ::1 - - [30/Apr/2023 12:12:55] "GET /style.css HTTP/1.1" 304 -
+        ::1 - - [30/Apr/2023 12:12:55] "GET /app.js HTTP/1.1" 304 -
+        ::1 - - [30/Apr/2023 12:12:55] code 404, message File not found
+        ::1 - - [30/Apr/2023 12:12:55] "GET /favicon.ico HTTP/1.1" 404 -</p>
+    <p>Four GET requests happened in less than a second!</p>
+    <h3>Part Three: Explore Dev Tools</h3>
+    <form action=`https://www.google.com/search?q=how+much+money+does+a+lawyer+make+in+tampa" method="GET">
+        <p><label for="city">Desired City of Residence:</label></p>
+        <input type="text" id="place">
+        <p><label for="job">Desired Occupation:</label></p>
+        <input type="text" id="work">
+        <p><button>Submit</button></p>
+    </form>
+    <!-- <script>const work = document.getElementById("work").value;const place = document.getElementById("place").value;
+    console.log(`I do ${work} in ${place}`);</script> -->
+</body>
+</html>
